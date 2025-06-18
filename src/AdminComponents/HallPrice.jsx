@@ -16,7 +16,6 @@ export const HallPrice = () => {
     let hallsResponse = [];
     let hallArr = [];
     let hallElements = [];
-    let hallConfig = [];
     let hallId = 0;
     let [halls, setHalls] = useState();  
     let prices = {
@@ -75,18 +74,6 @@ export const HallPrice = () => {
         let pastActive = document.getElementsByClassName("hall__config__name__active");
         pastActive[0].className = "hall__config__name";
         e.target.className = "hall__config__name__active";
-
-        // let hallName = e.target.textContent;
-        // for (let i = 0; i < hallsResponse.length; i++){
-        //     if(hallsResponse[i]["hall_name"] === hallName){
-        //         hallId = hallsResponse[i].id;
-        //         priceInfo.standart = hallsResponse[i]["hall_price_standart"];
-        //         priceInfo.vip = hallsResponse[i]["hall_price_vip"];
-        //         priceInfoFixed.standart = hallsResponse[i]["hall_price_standart"];
-        //         priceInfoFixed.vip = hallsResponse[i]["hall_price_vip"];
-        //         setId(id = hallId);
-        //     }
-        // };
         startPrice(e.target);
     }
 
