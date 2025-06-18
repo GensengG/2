@@ -1,6 +1,5 @@
 import "../App.jsx";
 import "../App.css";
-import { useState } from "react";
 
 export const Sheme = (click) => {
     let grid = click.click;
@@ -41,8 +40,7 @@ export const Sheme = (click) => {
     }   
     function generatePlaces(arr){
         return arr.map(item => (
-            <div className={`place ${item}`} key={counter ()} onClick={placeStatus}>
-                
+            <div className={`place ${item}`} key={counter ()} onClick={placeStatus}>          
             </div> 
         ));
     }
