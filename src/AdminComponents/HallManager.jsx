@@ -12,9 +12,10 @@ export const HallManager = () => {
     let hallElements = [];
     let [halls, setHalls] = useState();  
 
-    fetch( 'https://shfe-diplom.neto-server.ru/alldata' )
-        .then( response => response.json())
-        .then( data => {
+    function async() {
+        fetch( 'https://shfe-diplom.neto-server.ru/alldata' )
+            .then( response => response.json())
+            .then( data => {
                 hallsResponse = data.result.halls;
                 for (let i = 0; i < hallsResponse.length; i++){
                     hallArr.push(hallsResponse[i]["hall_name"])
@@ -28,6 +29,9 @@ export const HallManager = () => {
                 setHalls(halls = hallElements);
             }
         );
+    }
+
+    setTimeout(async, 2000);
 
     function showPopup() {
         const popUp = document.getElementById("popup__background");
