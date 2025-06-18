@@ -36,7 +36,7 @@ export const Logout = () => {
                 <Admin />
             ));
         } else {
-            // alert(result.error);
+            alert(result.error);
         } 
     }          
 
