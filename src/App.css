@@ -638,11 +638,9 @@ body{
   border: 1px solid rgba(183, 183, 183, 1);
   background-color: rgba(255, 255, 255, 1);
   padding: 8px 8px 8px 15px;
-  /* position: relative; */
   color: rgba(117, 117, 117, 1);
   font-weight: 400;
   font-size: 16px;
-  /* margin-top: 5px; */
 }
 
 .hall__config__name{
@@ -660,26 +658,12 @@ body{
   box-shadow: 0px 6px 8px 0px rgba(0, 0, 0, 0.24);
 }
 
-.hall__config__name:hover {
+.hall__config__name__active {
   background-color:rgba(255, 255, 255, 1);
   color: black;
   font-size: 15px;
   font-weight: 900;
   padding: 9px 20px;
-  transform: scale(1.1);
-}
-
-.hall__config__name:focus {
-  background-color:rgba(255, 255, 255, 1);
-  color: black;
-  font-size: 15px;
-  font-weight: 900;
-  transform: scale(1.1);
-}
-
-.hall__config__name:active {
-  background-color:#fff;
-  color: black;
   transform: scale(1.1);
 }
 
@@ -689,15 +673,12 @@ body{
   width: 100%;
   justify-content: center;
   box-sizing: border-box;
-  /* flex-direction: column; */
   border: 1px solid black;
   padding: 20px 0 30px 0;
-
   position: relative;
 }
 
 .btn__container{
-  /* padding-top: 3%; */
   width: 100%;
   display: flex;
   justify-content: center;
@@ -741,17 +722,10 @@ body{
   flex-wrap: nowrap;
   width: 100%;
   gap: 10px;
-  /* margin: auto; */
   justify-content: center;
   padding-top: 4px;
   padding-bottom: 5.5px;
 }
-
-/* .place {
-  border: 1px solid black;
-  width: 20px;
-  height: 20px;
-} */
 
 .status__form{
   margin-top: 16px;
