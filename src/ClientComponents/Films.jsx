@@ -57,56 +57,19 @@ export const Films = () => {
     let [filmsResult, setFilmsResult] = useState();
     let [clickSeance, setClickSeance] = useState();
     let [filmsData, setFilmsData] = useState();
-    // let filmsData = [];
     let seancesArr = [];
     let filmsArr = [];
     let hallsArr = [];
     let info = [];
     let result = [];
-    let films = [];   
+    let films = [];
 
-    fetch( 'https://shfe-diplom.neto-server.ru/alldata' )
-    .then( response => response.json())
-    .then( data => {
-        // filmsData = data.result;
-        setFilmsData(filmsData = data.result);
-        // console.log(data.result);
-    });
+    let [allFilms, setAllFilms] = useState();
 
-    // console.log(filmsData);
-
-    function seanceClick(item){
-        console.log(item);
-        const popUp = document.getElementById("popup__background__seance__click");
-        popUp.style.display = "block";
-    }
-
-    function hidePopupSeance(e) {
-        const popUp = document.getElementById("popup__background__seance__click");
-        popUp.style.display = "none";
-    }
-
-    function showPopupSeance(e) {
-        const dateBtn = document.getElementsByClassName("day active")[0];
-        const date = dateBtn.textContent.slice(0, -2)
-        console.log(e.target, date)
-    }
-
-    // seancesArr = filmsData.seances;
-    // filmsArr = filmsData.films;
-    // hallsArr = filmsData.halls;
-
-    function dayClick(e) {
-        films = [];
-        let pastActive = document.getElementsByClassName("day active");
-        for(let i = 0; i < pastActive.length; i++){
-            pastActive[i].classList.remove("active");
-        }
-        e.target.classList.add("active");
-
-        seancesArr = filmsData.seances;
-        filmsArr = filmsData.films;
-        hallsArr = filmsData.halls;
+    function generateStartFilms(){
+        let seancesArr = filmsData.seances;
+        let filmsArr = filmsData.films;
+        let hallsArr = filmsData.halls;
     
         info = seancesArr.map(item => ({
             id: item["seance_filmid"],
@@ -134,8 +97,7 @@ export const Films = () => {
             idArr.push(item.id)
         });
 
-        function select (info, films, shortArr, idArr){      
-            
+        function select (info, films, shortArr, idArr){                
             for (let k = 0; k < shortArr.length; k++){
                 let id = Number(Object.keys(shortArr[k]));
                 let obj = shortArr[k][id];
@@ -151,7 +113,6 @@ export const Films = () => {
                     })
                 }
             }
-
             for (let i = 0; i < films.length; i++){
                 let id = films[i].id;
                 let time = [];
@@ -162,9 +123,7 @@ export const Films = () => {
                         films[i].time = time;
                     }
                 }
-
             } 
-
             for (let i = 0; i < films.length; i++){
                 let num = films[i].number;
                 for (let q = 0; q < hallsArr.length; q++){
@@ -173,9 +132,10 @@ export const Films = () => {
                     }
                 }
             }
-        }        
+        }
+
         select (info, films, shortArr, idArr);
-        setFilmsResult(filmsResult = films);  
+        setFilmsResult(filmsResult = films); 
         
         result = filmsResult.map(item => (
             <div key = {item.id} className = "film__card">               
@@ -194,7 +154,31 @@ export const Films = () => {
             </div>
         ))
 
-        setFilmsResult(filmsResult = result);  
+        setAllFilms(allFilms = result);
+    }
+    
+    window.addEventListener('load', () => {
+        fetch( 'https://shfe-diplom.neto-server.ru/alldata' )
+        .then( response => response.json())
+        .then( data => {
+            setFilmsData(filmsData = data.result);
+            generateStartFilms();
+        });
+    }); 
+
+    function hidePopupSeance(e) {
+        const popUp = document.getElementById("popup__background__seance__click");
+        popUp.style.display = "none";
+    }
+
+    function dayClick(e) {
+        films = [];
+        let pastActive = document.getElementsByClassName("day active");
+        for(let i = 0; i < pastActive.length; i++){
+            pastActive[i].classList.remove("active");
+        }
+        e.target.classList.add("active");
+        generateStartFilms(); 
     }
 
     function propsChange(item){
@@ -219,7 +203,6 @@ export const Films = () => {
         }
         let nextActive = document.getElementsByClassName("day day__next");
         nextActive[0].classList.add("day__next__active");
-        // nextActive.setAttribute("style", "text-align: center");
 
         setDaysBtn(
             <div className="days__list">
@@ -250,7 +233,7 @@ export const Films = () => {
         <main class = "client__main">
             {daysBtn}
             <div className = "films__list">
-                {filmsResult}
+                {allFilms}
             </div>
             <div id = "popup__background__seance__click" className="popup__background__seance">
                 <div className="popup">
