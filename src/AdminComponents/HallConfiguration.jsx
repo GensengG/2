@@ -23,31 +23,13 @@ export const HallConfiguration = () => {
     let [config, setConfig] = useState();
     let [grid, setGrid] = useState({row: 0, places: 0, config: [], id: 0});
     let [fixedConfig, setFixedConfig] = useState({row: 0, places: 0, config: []});
-
-    fetch( 'https://shfe-diplom.neto-server.ru/alldata' )
-    .then( response => response.json())
-    .then( data => {
-            hallsResponse = data.result.halls;
-            for (let i = 0; i < hallsResponse.length; i++){
-                hallArr.push(hallsResponse[i]["hall_name"])
-            }
-            hallElements = hallArr.map(item => (
-                <button type="button" className = "hall__config__name" onClick = {hallStartConfig}>
-                {item}
-                </button>
-            ));
-            setHalls(halls = hallElements);
-        }  
-    ); 
-
-    let hallRaws = 0;
-    let hallPlaces = 0;
-
-    function hallStartConfig(e) {
-        let hallName = e.target.textContent;
+    
+    function startHall(start){
+        let hallName = start;
         let hallId = 0;
-        hallRaws = 0;
-        hallPlaces = 0;
+        let hallConfig = [];
+        let hallRaws = 0;
+        let hallPlaces = 0;
         for (let i = 0; i < hallsResponse.length; i++){
             if(hallsResponse[i]["hall_name"] === hallName){
                 hallId = hallsResponse[i].id;
@@ -60,6 +42,46 @@ export const HallConfiguration = () => {
                 setConfig(config = <Sheme click = {grid}/>);
             }
         };
+    }
+    
+    function async() {
+        fetch( 'https://shfe-diplom.neto-server.ru/alldata' )
+            .then( response => response.json())
+            .then( data => {
+                    hallsResponse = data.result.halls;
+                    for (let i = 0; i < hallsResponse.length; i++){
+                        hallArr.push(hallsResponse[i]["hall_name"])
+                    };
+
+                function getClass(item){
+                    if(hallArr[0] === item){
+                        return "hall__config__name__active";
+                    } else {
+                        return "hall__config__name";
+                    }
+                };
+
+                hallElements = hallArr.map(item => (
+                    <button type="button" className = {getClass(item)} onClick = {hallStartConfig}>
+                        {item}
+                    </button>
+                ));
+                setHalls(halls = hallElements);
+
+                startHall(document.getElementsByClassName("hall__config__name__active")[0].textContent);
+            }
+        )
+    }
+    setTimeout(async, 2000);
+
+    let hallRaws = 0;
+    let hallPlaces = 0;
+
+    function hallStartConfig(e) {
+        let pastActive = document.getElementsByClassName("hall__config__name__active");
+        pastActive[0].className = "hall__config__name";
+        e.target.className = "hall__config__name__active";
+        startHall(e.target.textContent);
     };
 
     let rowCount = 0;
