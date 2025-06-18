@@ -7,7 +7,6 @@ import { IntoLent } from "./IntoLent.jsx";
 // Пароль - shfe-diplom
 
 export const SessionGrid = () => {    
-    
     function hideSection(e) {
         e.preventDefault();
         const sectionBody = document.getElementById("session__grid__body");
@@ -61,26 +60,6 @@ export const SessionGrid = () => {
             };
 
             let colorArr = [
-                // "#00FFFF",
-                // "#E0FFFF",
-                // "#AFEEEE",
-                // "#7FFFD4",
-                // "#40E0D0",
-                // "#48D1CC",
-                // "#00CED1",
-                // "#5F9EA0",
-                // "#4682B4",
-                // "#B0C4DE",
-                // "#B0E0E6",
-                // "#ADD8E6",
-                // "#87CEEB",
-                // "#87CEFA",
-                // "#00BFFF",
-                // "#1E90FF",
-                // "#6495ED",
-                // "#7B68EE",
-                // "#4169E1",
-
                 "#CCCCFF",
                 "#C5D0E6",
                 "#ABCDEF",
@@ -202,9 +181,7 @@ export const SessionGrid = () => {
             setFilms(films = filmsElements);
 
             for (let i = 0; i < hallsResponse.length; i++){
-                // if(hallsResponse[i]["hall_open"] === 1){
-                    hallArr.push(hallsResponse[i]["hall_name"]);
-                // }
+                hallArr.push(hallsResponse[i]["hall_name"]);
             }
             
             hallElements = hallArr.map(item => (
@@ -290,9 +267,7 @@ export const SessionGrid = () => {
 
     function drop(e){
         e.preventDefault();
-        // let dropedHall = e.target;
         let hallName =e.target.textContent;
-
         e.target.addEventListener("drop", (e) => {
             e.preventDefault();
             let container = e.target.closest("div");
@@ -353,7 +328,6 @@ export const SessionGrid = () => {
                 deleteId = hallsResponse[i].id
             }
         }
-
         fetch( `https://shfe-diplom.neto-server.ru/film/${deleteId}`, {
             method: 'DELETE',
         })
@@ -384,7 +358,6 @@ export const SessionGrid = () => {
         description.value = "";
         country.value = "";
         poster.value = "";
-        // setPoster(posters = "Постер еще не выбран")
     }
 
     function filmAdd(){
@@ -400,11 +373,6 @@ export const SessionGrid = () => {
         })
         .then( response => response.json())
         .then( data => console.log( data ));
-    }
-
-    function ShowPopupSession(){
-        const popUp = document.getElementById("popup__background__add__session");
-        popUp.style.display = "block";
     }
 
     function hidePopupSession() {
@@ -442,7 +410,6 @@ export const SessionGrid = () => {
         let filmDuration = 0;
         let maxHour = 0;
         let maxMinutes = 0;
-        let seanceHallid = 0;
         let seanceFilmid = 0;
         for (let i = 0; i < filmsInfo.length; i++){
             if(filmsInfo[i]["name"] === filmName.value){
@@ -562,7 +529,6 @@ export const SessionGrid = () => {
                                         <button className = "film__add__btn">Добавить фильм</button>
                                         <input type="file" name="poster" id="poster" accept=".png" className = "film__poster__input"></input>  
                                         <button id="poster__add__btn" className="poster__add__btn" onClick={posterAdd}>Загрузить постер</button>
-                                        {/* <span id="selected__poster" className="selected__poster">{posters}</span> */}
                                         <button className = "btn__cancel">Отменить</button>
                                     </div>
                                 </div>
