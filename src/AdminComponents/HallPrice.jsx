@@ -27,24 +27,8 @@ export const HallPrice = () => {
     let [priceInfo, setPriceInfo] = useState({standart: 0, vip: 0});
     let [priceInfoFixed, setPriceInfoFixed] = useState({standart: 0, vip: 0});
     
-    fetch( 'https://shfe-diplom.neto-server.ru/alldata' )
-    .then( response => response.json())
-    .then( data => {
-            hallsResponse = data.result.halls;
-            for (let i = 0; i < hallsResponse.length; i++){
-                hallArr.push(hallsResponse[i]["hall_name"])
-            }
-            hallElements = hallArr.map(item => (
-                <button type="button" className = "hall__config__name" onClick={hallNameChecked}>
-                {item}
-                </button>
-            ));
-            setHalls(halls = hallElements);
-        }  
-    );
-    
-    function hallNameChecked(e) {
-        let hallName = e.target.textContent;
+    function startPrice(start){
+        let hallName = start.textContent;
         for (let i = 0; i < hallsResponse.length; i++){
             if(hallsResponse[i]["hall_name"] === hallName){
                 hallId = hallsResponse[i].id;
@@ -55,6 +39,43 @@ export const HallPrice = () => {
                 setId(id = hallId);
             }
         };
+    }
+
+    function async () {
+        fetch( 'https://shfe-diplom.neto-server.ru/alldata' )
+        .then( response => response.json())
+        .then( data => {
+                hallsResponse = data.result.halls;
+                for (let i = 0; i < hallsResponse.length; i++){
+                    hallArr.push(hallsResponse[i]["hall_name"])
+                }
+                function getClass(item){
+                    if(hallArr[0] === item){
+                        return "hall__config__name__active";
+
+                    } else {
+                        return "hall__config__name";
+                    }
+                };
+                hallElements = hallArr.map(item => (
+                    <button type="button" className = {getClass(item)} onClick={hallNameChecked}>
+                    {item}
+                    </button>
+                ));
+                setHalls(halls = hallElements);
+
+                startPrice(document.getElementsByClassName("hall__config__name__active")[0]);
+            }  
+        )
+    };
+
+    async();
+    
+    function hallNameChecked(e) {
+        let pastActive = document.getElementsByClassName("hall__config__name__active");
+        pastActive[0].className = "hall__config__name";
+        e.target.className = "hall__config__name__active";
+        startPrice(e.target);
     }
 
     let standartPrice = document.getElementById("standartPrice");
