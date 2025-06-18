@@ -24,23 +24,39 @@ export const HallOpened = () => {
     let [open, setOpen] = useState();
     let [openInfo, setOpenInfo] = useState({text: "Выберите зал", btn: "Открыть/Закрыть зал"});
     
-    fetch( 'https://shfe-diplom.neto-server.ru/alldata' )
-    .then( response => response.json())
-    .then( data => {
-            hallsResponse = data.result.halls;
-            for (let i = 0; i < hallsResponse.length; i++){
-                hallArr.push(hallsResponse[i]["hall_name"])
+    function async () {
+        fetch( 'https://shfe-diplom.neto-server.ru/alldata' )
+        .then( response => response.json())
+        .then( data => {
+                hallsResponse = data.result.halls;
+                for (let i = 0; i < hallsResponse.length; i++){
+                    hallArr.push(hallsResponse[i]["hall_name"])
+                }
+                function getClass(item){
+                    if(hallArr[0] === item){
+                        return "hall__config__name__active";
+
+                    } else {
+                        return "hall__config__name";
+                    }
+                };
+                hallElements = hallArr.map(item => (
+                    <button type="button" className = {getClass(item)} onClick = {hallNameChecked}>
+                    {item}
+                    </button>
+                ));
+                setHalls(halls = hallElements);
             }
-            hallElements = hallArr.map(item => (
-                <button type="button" className = "hall__config__name" onClick = {hallNameChecked}>
-                {item}
-                </button>
-            ));
-            setHalls(halls = hallElements);
-        }
-    );
+        );
+    };
+
+    async();
 
     function hallNameChecked(e) {
+        let pastActive = document.getElementsByClassName("hall__config__name__active");
+        pastActive[0].className = "hall__config__name";
+        e.target.className = "hall__config__name__active";
+       
         let hallName = e.target.textContent;
         for (let i = 0; i < hallsResponse.length; i++){
             if(hallsResponse[i]["hall_name"] === hallName){
