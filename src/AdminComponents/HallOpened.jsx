@@ -5,8 +5,7 @@ import { useState } from "react";
 // Логин - shfe-diplom@netology.ru
 // Пароль - shfe-diplom
 
-export const HallOpened = () => {    
-    
+export const HallOpened = () => {       
     function hideSection(e) {
         e.preventDefault();
         const sectionBody = document.getElementById("hall__opened__body");
@@ -16,7 +15,6 @@ export const HallOpened = () => {
     let hallsResponse = [];
     let hallArr = [];
     let hallElements = [];
-    let hallConfig = [];
     let hallOpen = 0;
     let hallId = 0;
     let [halls, setHalls] = useState();  
