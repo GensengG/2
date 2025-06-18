@@ -7,7 +7,6 @@ import { Sheme } from "./Sheme.jsx";
 // Пароль - shfe-diplom
 
 export const HallConfiguration = () => {    
-    
     function hideSection(e) {
         e.preventDefault();
         const sectionBody = document.getElementById("hall__config__body");
@@ -17,7 +16,6 @@ export const HallConfiguration = () => {
     let hallsResponse = [];
     let hallArr = [];
     let hallElements = [];
-    let hallConfig = [];
     let [halls, setHalls] = useState();  
     let [id, setId] = useState(); 
     let [grid, setGrid] = useState({row: 0, places: 0, config: [], id: 0});
@@ -74,32 +72,11 @@ export const HallConfiguration = () => {
         )
     }
     setTimeout(async, 2000);
-    // async();
-
-    // let hallRaws = 0;
-    // let hallPlaces = 0;
-
     function hallStartConfig(e) {
         let pastActive = document.getElementsByClassName("hall__config__name__active");
         pastActive[0].className = "hall__config__name";
         e.target.className = "hall__config__name__active";
         startHall(e.target.textContent);
-        // let hallName = e.target.textContent;
-        // let hallId = 0;
-        // hallRaws = 0;
-        // hallPlaces = 0;
-        // for (let i = 0; i < hallsResponse.length; i++){
-        //     if(hallsResponse[i]["hall_name"] === hallName){
-        //         hallId = hallsResponse[i].id;
-        //         hallConfig = hallsResponse[i]["hall_config"];
-        //         hallRaws = hallsResponse[i]["hall_rows"];
-        //         hallPlaces = hallsResponse[i]["hall_places"];
-        //         setId(id = hallId);
-        //         setGrid({row: hallRaws, places: hallPlaces, config: hallConfig, id: hallId});
-        //         setFixedConfig({row: hallRaws, places: hallPlaces, config: hallConfig});
-        //         setConfig(config = <Sheme click = {grid}/>);
-        //     }
-        // };
     };
 
     let rowCount = 0;
