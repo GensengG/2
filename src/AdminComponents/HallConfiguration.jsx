@@ -1,12 +1,12 @@
 import "../App.jsx";
 import "../App.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Sheme } from "./Sheme.jsx";
 
 // Логин - shfe-diplom@netology.ru
 // Пароль - shfe-diplom
 
-export const HallConfiguration = () => {    
+export const HallConfiguration = () => {       
     function hideSection(e) {
         e.preventDefault();
         const sectionBody = document.getElementById("hall__config__body");
@@ -21,9 +21,10 @@ export const HallConfiguration = () => {
     let [grid, setGrid] = useState({row: 0, places: 0, config: [], id: 0});
     let [fixedConfig, setFixedConfig] = useState({row: 0, places: 0, config: []});
     let [config, setConfig] = useState();
-
-    function startHall(start){
-        let hallName = start;
+    let [activeHall, setActiveHallName] = useState();
+    
+    function startState(activeHall){
+        let hallName = activeHall;
         let hallId = 0;
         let hallConfig = [];
         let hallRaws = 0;
@@ -37,27 +38,26 @@ export const HallConfiguration = () => {
                 setId(id = hallId);
                 setGrid({row: hallRaws, places: hallPlaces, config: hallConfig, id: hallId});
                 setFixedConfig({row: hallRaws, places: hallPlaces, config: hallConfig});
-                setConfig(config = <Sheme click = {grid}/>);
-            }
+            };
         };
-    }
+    };
 
-    function async() {
+    function loadHalls(){
         fetch( 'https://shfe-diplom.neto-server.ru/alldata' )
             .then( response => response.json())
             .then( data => {
-                    hallsResponse = data.result.halls;
-                    for (let i = 0; i < hallsResponse.length; i++){
-                        hallArr.push(hallsResponse[i]["hall_name"])
-                    };
+                hallArr = [];
+                hallsResponse = data.result.halls;
+                for (let i = 0; i < hallsResponse.length; i++){
+                    hallArr.push(hallsResponse[i]["hall_name"])
+                };
 
                 function getClass(item){
-                        if(hallArr[0] === item){
-                            return "hall__config__name__active";
-
-                        } else {
-                            return "hall__config__name";
-                        }
+                    if(hallArr[0] === item){
+                        return "hall__config__name__active";
+                    } else {
+                        return "hall__config__name";
+                    }
                 };
 
                 hallElements = hallArr.map(item => (
@@ -66,17 +66,21 @@ export const HallConfiguration = () => {
                     </button>
                 ));
                 setHalls(halls = hallElements);
+                let activeHallName = document.getElementsByClassName("hall__config__name__active")[0]?.textContent;
+                setActiveHallName(activeHall = activeHallName);
+                startState(activeHall);
+        });
+    };
 
-                startHall(document.getElementsByClassName("hall__config__name__active")[0].textContent);
-            }
-        )
-    }
-    setTimeout(async, 2000);
+    useEffect(() => {
+        loadHalls();
+    }, []);
+
     function hallStartConfig(e) {
         let pastActive = document.getElementsByClassName("hall__config__name__active");
         pastActive[0].className = "hall__config__name";
         e.target.className = "hall__config__name__active";
-        startHall(e.target.textContent);
+        startState(e.target.textContent);
     };
 
     let rowCount = 0;
@@ -129,7 +133,7 @@ export const HallConfiguration = () => {
 
     function configBtnCancel(){
         setConfig(config = <Sheme click = {fixedConfig}/>);
-    }
+    };
 
     function configBtnSave(){
         let rows = Array.from(document.getElementsByClassName("row"));
@@ -137,14 +141,15 @@ export const HallConfiguration = () => {
         let arrayConfig = [] 
         for(let i = 0; i < rows.length; i++){
             arrayConfig.push(Array.from(rows[i].getElementsByClassName("place")))
-        }
+        };
 
         for(let i = 0; i < arrayConfig.length; i++){
             for(let j = 0; j < arrayConfig[i].length; j++){
                 let className = arrayConfig[i][j].className;
                 arrayConfig[i][j] = className.slice(6);
-            }
-        }
+            };
+        };
+        
         let placeCount = arrayConfig[0].length;
         const params = new FormData();
         params.set('rowCount', String(rowCount));
@@ -153,9 +158,13 @@ export const HallConfiguration = () => {
         fetch( `https://shfe-diplom.neto-server.ru/hall/${id}`, {
             method: 'POST',
             body: params 
-        })
+        });
         .then( response => response.json())
-    }
+        .then(data => {
+            console.log(data);
+            loadHalls();
+        });
+    };
 
     return (
         <>
@@ -213,7 +222,7 @@ export const HallConfiguration = () => {
                         </div>
                         <div className = "hall__zone">
                             <p className="screen">ЭКРАН</p>
-                            {config}
+                            {<Sheme click = {grid}/>}
                         </div>
                         <div className = "btn__container">
                             <button className = "btn__cancel" onClick={configBtnCancel}>Отмена</button>
@@ -224,7 +233,6 @@ export const HallConfiguration = () => {
             </section>
         </>
     );
-
 };
 
 export default HallConfiguration;
