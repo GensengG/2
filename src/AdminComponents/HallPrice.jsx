@@ -1,27 +1,19 @@
 import "../App.jsx";
 import "../App.css";
-import { useState } from "react";
-
-// Логин - shfe-diplom@netology.ru
-// Пароль - shfe-diplom
+import { useState, useEffect } from "react";
 
 export const HallPrice = () => {    
-    
     function hideSection(e) {
         e.preventDefault();
         const sectionBody = document.getElementById("hall__price__body");
         sectionBody.classList.toggle("hall__price__body__active");
-    }
+    };
 
     let hallsResponse = [];
     let hallArr = [];
     let hallElements = [];
     let hallId = 0;
     let [halls, setHalls] = useState();  
-    let prices = {
-        standart: 0,
-        vip: 0,
-    }
     let [id, setId] = useState();
     let [priceInfo, setPriceInfo] = useState({standart: 0, vip: 0});
     let [priceInfoFixed, setPriceInfoFixed] = useState({standart: 0, vip: 0});
@@ -36,15 +28,16 @@ export const HallPrice = () => {
                 priceInfoFixed.standart = hallsResponse[i]["hall_price_standart"];
                 priceInfoFixed.vip = hallsResponse[i]["hall_price_vip"];
                 setId(id = hallId);
-            }
+            };
         };
-    }
+    };
 
-    function async () {
+    useEffect(() => {
         fetch( 'https://shfe-diplom.neto-server.ru/alldata' )
         .then( response => response.json())
         .then( data => {
                 hallsResponse = data.result.halls;
+                hallArr = [];
                 for (let i = 0; i < hallsResponse.length; i++){
                     hallArr.push(hallsResponse[i]["hall_name"])
                 }
@@ -64,18 +57,15 @@ export const HallPrice = () => {
                 setHalls(halls = hallElements);
 
                 startPrice(document.getElementsByClassName("hall__config__name__active")[0]);
-            }  
-        )
-    };
-
-    async();
+        });
+    }, []);
     
     function hallNameChecked(e) {
         let pastActive = document.getElementsByClassName("hall__config__name__active");
         pastActive[0].className = "hall__config__name";
         e.target.className = "hall__config__name__active";
         startPrice(e.target);
-    }
+    };
 
     let standartPrice = document.getElementById("standartPrice");
     let vipPrice = document.getElementById("vipPrice");
@@ -86,7 +76,7 @@ export const HallPrice = () => {
         newPrice.standart = e.value;
         newPrice.vip = vipPrice.value;
         setPriceInfo(priceInfo = newPrice)
-    }
+    };
 
     function changeVip(e){
         e.preventDefault();
@@ -94,12 +84,12 @@ export const HallPrice = () => {
         newPrice.standart = standartPrice.value;
         newPrice.vip = e.value;
         setPriceInfo(priceInfo = newPrice)
-    }
+    };
 
     function priceBtnCancel(){
         standartPrice.value = priceInfoFixed.standart;
         vipPrice.value = priceInfoFixed.vip;
-    }
+    };
 
     function priceBtnSave(){
         let params = new FormData()
@@ -109,8 +99,11 @@ export const HallPrice = () => {
             method: 'POST',
             body: params 
         })
-            .then( response => response.json())
-    }
+        .then( response => response.json())
+        .then(data => {
+            console.log(data)
+        })
+    };
 
     return (
         <>
@@ -151,6 +144,6 @@ export const HallPrice = () => {
             </section>
         </>
     );
-}
+};
 
 export default HallPrice;
