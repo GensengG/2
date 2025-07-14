@@ -1,9 +1,5 @@
 @import url("//fonts.googleapis.com/css?family=Work+Sans:300,400,600"); 
 
-header.style{
-
-}
-
 body{
   background-image: url("..//client__background.jpg");
   background-color: #df6a22;
@@ -14,41 +10,18 @@ body{
 }
 
 .admin__body{
-  background-image: url(..//admin__background.jpg); 
   background-color: rgba(0, 0, 0, 0.5); 
-  /* background-size:cover;
-  background-position: center; */
   object-fit: cover;
-  /* height: 100vh; */
-  /* min-width: 100vW; */
-  /* overflow-y: scroll; */
-  min-height: 100%;
-  /* background-attachment: fixed; */
-}
-
-.admin__body__shadow{
-  background-color: rgba(0, 0, 0, 0.5);
-  width: 100vw;
   height: 100vh;
-  /* overflow-y: scroll; */
-  /* margin: 0;
-  padding: 0; */
-  position: absolute;
+  overflow-y: scroll;
+  min-height: 100%;
 }
-
-/* .clien__body{
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-} */
 
 .head {
   align-items: center;
   text-align: center;
   display: flex;
   flex-wrap: wrap;
-  /* flex-direction: column; */
   box-sizing: border-box;
   max-width: 990px;
   height: 60px;
@@ -66,18 +39,9 @@ body{
   text-align: center;
   display: flex;
   flex-wrap: wrap;
-  /* flex-direction: column; */
   box-sizing: border-box;
   height: 100px;
 }
-
-/* .head, .head__admin{
-  box-sizing: border-box;
-  max-width: 990px;
-  height: 68px;
-  margin: auto;
-  padding: 14px;
-} */
 
 .logo{
   width: 212px;
@@ -93,7 +57,6 @@ body{
 }
 
 .logo__tipe{
-  /* min-width: 212px; */
   font-weight: 400;
   font-size: 10px;
   line-height: 12px;
@@ -121,18 +84,14 @@ body{
 
 .login__div{
   background-color: rgba(234, 233, 235, 0.95);
-  /* margin-top: 73px; */
   margin: 27px auto 2px auto;
   width: 480px;
   height: 294px;
-  /* margin-right: 25%;
-  margin-left: 25%; */
 }
 
 .login__form{
   display: flex;
   flex-wrap: wrap;
-  /* height: 200px; */
 }
 
 .login__form__name{
@@ -190,7 +149,6 @@ body{
 }
 
 .form__item__input:hover{
-  transform: scale(1.03);
   border-radius: 0px;
   border: 1px solid rgba(183, 183, 183, 1);
 }
@@ -207,7 +165,6 @@ body{
   height: 40px;
   margin: 10px 142px;
   border-radius: 3px;
-  /* font-size: 12px; */
   font-weight: 500;
   font-size: 14px;
   line-height: 16px;
@@ -219,13 +176,11 @@ body{
 .client__main {
   max-width: 990px;
   margin: auto;
-  /* margin-right: 15%; */
 }
 
 .admin__main{
   max-width: 953px;
   margin: auto;
-  /* margin-top: 30px; */
 }
 
 .days__list{
@@ -283,13 +238,6 @@ body{
   font-size: 24px;
 }
 
-/* .films__list{
-  margin-top: 10px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
-} */
-
 .film__card{
   display: flex;
   flex-wrap: wrap;
@@ -298,7 +246,6 @@ body{
   padding: 15px;
   border-radius: 2px;
   width: 100%;
-  /* height: 350px; */
 }
 
 .film__info{  
@@ -306,13 +253,11 @@ body{
   flex-wrap: nowrap;
   justify-content: space-between;
   width: 100%;
-  /* height: 175px; */
 }
 
 .film__poster{
   width: 125px;
   height: 175px; 
-  /* object-fit: ; */
 }
 
 .film__text{
@@ -413,7 +358,6 @@ body{
   width: 38px;
   height: 38px;
   top: 20px;
-  /* top: 20%;*/
   left: 35px; 
   border-radius: 50%;
   transform: rotate(50deg);
@@ -436,7 +380,7 @@ body{
   width: 2px;
   height: 92px;
   top: 0px;
-  left: 56px;
+  left: 58px;
 }
 
 .section__header__arrow{
@@ -458,13 +402,11 @@ body{
 .hall__manager__body{
   background-color: rgba(247, 246, 247, 0.792);
   width: 100%;
-  /* min-height: 212px; */
   font-size: 14px;
   box-sizing: content-box;
   padding: 30px 50px 35px 100px;
   position: relative;
   height: fit-content
-  /* display: none; */
 }
 
 .hall__manager__body::before{
@@ -474,7 +416,7 @@ body{
   width: 2px;
   height: 100%;
   top: 0px;
-  left: 57px;
+  left: 58px;
 }
 
 .hall__manager__body__active{
@@ -534,7 +476,6 @@ body{
 }
 
 .hall__delete:hover{
-  transform: scale(1.1);
   background-color: rgb(9, 128, 116);
 }
 
@@ -542,12 +483,10 @@ body{
   background-color: rgba(247, 246, 247, 0.792);
   width: 100%;
   box-sizing: border-box;
-  /* min-height: 540px; */
   height: fit-content;
   font-size: 14px;
   padding: 20px 45px 32px 100px;
   position: relative;
-  /* display: inline-block; */
 }
 
 .hall__config__body::before{
@@ -565,7 +504,6 @@ body{
 }
 
 .config__text {
-  /* width: 100%; */
   font-weight: 400;
   font-size: 16px;
   line-height: 18px;
@@ -592,7 +530,6 @@ body{
   align-items: center;
   gap: 10px;
   margin-top: -5px;
-  /* position: relative; */
   align-items: center;
 }
 
@@ -601,11 +538,6 @@ body{
   box-sizing: border-box;
   text-align: end;
   margin-bottom: 1px;
-  /* align-self: flex-end; */
-  /* align-self: end; */
-  /* margin-top: 20px; */
-  /* margin: 3px; */
-  /* padding-bottom: px; */
 }
 
 .label__row, .label__place{
@@ -613,14 +545,8 @@ body{
   font-weight: 400;
   font-size: 12px;
   line-height: 14px;
-  /* position: absolute; */
-  /* top: -7px; */
   color: #5f5d5d;
 }
-
-/* .label__place{
-  right: 42%;
-} */
 
 .hall__places__form__item{
   display: flex;
@@ -675,6 +601,7 @@ body{
   box-sizing: border-box;
   border: 1px solid black;
   padding: 20px 0 30px 0;
+
   position: relative;
 }
 
@@ -739,16 +666,9 @@ body{
   justify-content: space-between;
   padding-left: 35px;
   margin-top: -5px;
-  /* box-sizing: border-box; */
-  /* margin-top: -10px; */
-  /* margin-bottom: 5px; */
-  /* padding-top: -px; */
-  /* position: relative;
-  align-items: center; */
 }
 
 .status__container{
-  /* min-width: 30%;  */
   display: flex;
   flex-wrap: nowrap;
   align-items: center;
@@ -772,31 +692,22 @@ body{
   width: 26px;
   height: 26px;
   box-sizing: content-box;
-  /* border: 1px solid #000000; */
   border-radius: 4px;
-  /* background-color: darkgrey; */
-  /* margin-right: 1px; */
 } 
 
 .status__span__standart{
-  /* width: 26px; */
-  /* height: 26px; */
   background-color: rgb(174, 174, 174);
   border: 1px solid rgba(57, 57, 57, 1);
   border-radius: 4px;
 }
 
 .status__span__vip{
-  /* width: 26px;
-  height: 26px; */
   background-color: rgba(176, 214, 216, 1);
   border: 1px solid rgba(10, 130, 138, 1);
   border-radius: 4px;
 }
 
 .status__span__disabled{
-  /* width: 26px;
-  height: 26px; */
   background-color: transparent;
   border: 1px solid rgb(165, 164, 164);
   border-radius: 4px;
@@ -812,9 +723,6 @@ body{
   height: 26px;
   border-radius: 4px;
   background-color: rgb(155, 113, 161);
-  /* top: 50%;
-  left: 50%; */
-  /* transform: translate(-50%, -50%); */
 }
 
 .status__input{
@@ -840,8 +748,6 @@ body{
 }
 
 .free__standart{
-  /* border: 1px solid rgba(57, 57, 57, 1);
-  border-radius: 4px; */
   background-color: rgba(255, 255, 255, 1);
 }
 
@@ -851,18 +757,14 @@ body{
 }
 
 .free__vip{
-  /* border: 1px solid rgba(10, 130, 138, 1);
-  border-radius: 4px; */
   background-color: rgba(249, 149, 58, 1);
 }
 
 .disabled{
-  /* border: 1.3px solid rgba(203, 202, 200, 0.7); */
   background-color: transparent;
 }
 
 div .booked__place{
-  /* border: 1.3px solid rgb(10, 73, 66); */
   width: 24px;
   height: 24px;
   background-color: rgba(37, 196, 206, 1);
@@ -882,7 +784,6 @@ div .booked__place{
 .hall__price__body{
   background-color: rgba(247, 246, 247, 0.792);
   width: 100%;
-  /* min-height: 340px; */
   height: fit-content;
   font-size: 14px;
   padding: 20px 50px 30px 100px;
@@ -902,10 +803,6 @@ div .booked__place{
 .hall__price__body__active{
   display: none;
 }
-
-/* .active{
-  display: block;
-} */
 
 .hall__prices__form{
   display: flex;
@@ -930,7 +827,6 @@ div .booked__place{
   height: 36px;
   box-sizing: border-box;
   padding-left: 8px;
-  /* padding-top: -2px; */
   border: 1px solid rgba(183, 183, 183, 1);
   background-color: rgba(255, 255, 255, 1);
   color: rgba(117, 117, 117, 1);
@@ -967,12 +863,10 @@ div .booked__place{
 .hall__opened__body{
   background-color: rgba(247, 246, 247, 0.792);
   width: 100%;
-  /* height: 225px; */
   height: fit-content;
   font-size: 14px;
   padding: 20px 50px 30px 100px;
   position: relative;
-  /* display: none; */
 }
 
 .hall__opened__body::before{
@@ -996,7 +890,6 @@ div .booked__place{
   color: #000000;
   margin-bottom: 30px;
   box-sizing: border-box;
-  /* padding-top: 40px; */
 }
 
 .open__sales{
@@ -1036,12 +929,10 @@ div .booked__place{
   background-color: rgba(247, 246, 247, 0.792);
   width: 100%;
   box-sizing: border-box;
-  /* min-height: 515px; */
   height: fit-content;
   font-size: 14px;
   padding: 30px 70px 30px 100px;
   position: relative;
-  /* display: none; */
 }
 
 .session__grid__body::before{
@@ -1066,7 +957,6 @@ div .booked__place{
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: rgba(234, 233, 235, 0.95);
-  /* border-radius: 5px; */
 }
 
 .popup__body__add__film{
@@ -1104,7 +994,6 @@ div .booked__place{
   width: 100%;
   box-sizing: border-box;
   padding-left: 4px;
-  /* margin-top: 2px; */
 }
 
 .btns__container{
@@ -1151,8 +1040,6 @@ div .booked__place{
   display: flex;
   flex-wrap: nowrap;
   width: 100%;
-  /* width: 31.5%; */
-  /* width: 259px; */
   height: 52px;
   gap: 10px;
   border: 1px solid rgba(0, 0, 0, 0.3);
@@ -1167,7 +1054,6 @@ div .booked__place{
   min-width: 200px;
   box-sizing: border-box;
   padding:0 10px;
-  /* height: 100%; */
 }
 
 .film__item__name{
@@ -1204,7 +1090,6 @@ div .booked__place{
 }
 
 .film__item__delete:hover{
-  transform: scale(1.1);
   background-color: rgb(9, 128, 116);
 }
 
@@ -1226,7 +1111,6 @@ div .booked__place{
   justify-content: center;
   flex-wrap: wrap;
   margin: 20px 30px 0px 30px;
-  /* width: 816px; */
 }
 
 .session{
@@ -1257,7 +1141,6 @@ div .booked__place{
 }
 
 .into__lent__container{
-  /* width: 72px; */
   height: 40px;
   box-sizing: border-box;
   padding: 10px;
@@ -1269,7 +1152,6 @@ div .booked__place{
   width: 100%;
   height: 100%;
   border: 1px solid rgba(0, 0, 0, 0.3);
-  /* margin-top: -14.5px; */
 }
 
 .into__lent__name{
@@ -1282,10 +1164,6 @@ div .booked__place{
   font-size: 10px;
   line-height: 10px;
   color: rgba(0, 0, 0, 1);
-  /* padding-: 14px; */
-  /* margin-top: 27px; */
-  /* padding: 12% 0 0 0; */
-  /* text-align: center; */
 }
 
 .into__lent__time{
@@ -1295,7 +1173,6 @@ div .booked__place{
   color: rgba(132, 132, 132, 1);
   bottom: -37px;
   left: -20px;
-  /* border-left: 1px solid rgba(132, 132, 132, 1); */
   padding-left: 4px;
   height: 7px;
 }
@@ -1319,7 +1196,6 @@ div .booked__place{
   height: 40px;
   margin-left: 10px;
   box-sizing: border-box;
-  /* padding: 11px 31px; */
   border-radius: 3px;
   font-size: 14px;
   font-weight: 500;
@@ -1340,7 +1216,7 @@ div .booked__place{
 }
 
 /* PopUp Styles */
-.popup__background{
+.popup__background, .popup__background__session{
   position: fixed;
   top: 0;
   left: 0;
@@ -1359,12 +1235,10 @@ div .booked__place{
   background-color: rgba(0, 0, 0, 0.5);
   min-width: 100vW;
   min-height: 100vh;
-  /* overflow-y: scroll; */
   position: absolute;
   box-sizing: border-box;
 }
 
-/* .popup__hall__manager { */
 .popup__hall__manager{
   position: absolute;
   width: 960px;
@@ -1372,7 +1246,6 @@ div .booked__place{
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: #fff;
-  /* margin-top: -20px; */
   border-radius: 5px;
   background-color: rgba(234, 233, 235, 0.95);
 }
@@ -1383,7 +1256,6 @@ div .booked__place{
   margin: auto;
   padding-top: 25px;
   padding-bottom: 35px;
-  /* background-color: rgba(234, 233, 235, 0.95); */
 }
 
 .popup__label{
@@ -1404,7 +1276,6 @@ div .booked__place{
   padding-left: 4px;
   margin-top: 1px;
   height: 40px;
-  /* margin-top: 2px; */
 }
 
 .popup__header{
@@ -1413,10 +1284,9 @@ div .booked__place{
   height: 57px;
   background-color: rgba(99, 83, 108, 1);
   font-size: 18px;
-  /* padding: 16px 42px 14px; */
 }
 
-.popup__name__hall__manager, .popup__name__add__hall, .popup__name__add__seance{
+.popup__name__hall__manager, .popup__name__add__hall, .popup__name__add__seance, .popup__name__delete__seance{
   font-weight: 700;
   font-size: 22px;
   line-height: 25px;
@@ -1489,77 +1359,15 @@ div .booked__place{
   color: rgba(99, 83, 108, 1);
 }
 
-/* .film__name__label, .film__name__input, .film__time__label, .film__time__input, .film__description__label, .film__description__input, .film__country__label, .film__country__input, .hall__name__input, .time__input{
-  width: 100%;
-}
-
-.film__name__label, .film__time__label, .film__description__label, .film__country__label, .film__poster__label, .hall__name__label, .time__label{
-  color: #5f5d5d;
-}
-
-.film__name__input, .film__time__input, .film__description__input, .film__country__input, .hall__name__input, .time__input{
-  outline:none;
-  border-radius: 0;
-  border: solid 0.3px #5f5d5d;
-  min-height: 20px;
-}
-
-.film__name__input:hover , .film__time__input:hover , .film__description__input:hover , .film__country__input:hover, .hall__name__input:hover, .time__input:hover {
-  background-color: rgba(193, 148, 198, 0.534);
-}
-
-.film__name__input:focus , .film__time__input:focus , .film__description__input:focus , .film__country__input:focus, .hall__name__input:focus, .time__input:focus {
-  background-color: rgba(193, 148, 198, 0.534);
-} */
-
-/* .film__description__input {
-  min-height: 100px;
-  text-align: left;
-} */
-
-/* .film__add__btn, .poster__add__btn, .poster__show__popup{
-  color: #fff;
-  background-color: rgb(9, 128, 116);
-  font-size: 10px;
-  border-radius: 5px;
-  box-shadow: 0px 2px 3px 2px rgba(34, 60, 80, 0.2);
-  margin-top: 20px;
-} */
-
 .film__poster__input{
   display: none;
   visibility:hidden;
 }
 
-/* .film__poster__label{ 
-  display: inline-block;
-  font-family: Work Sans;
-  padding: 15px;
-  align-items: center;
-  text-align: center;
-  cursor: pointer;
-  color: #fff;
-  background-color: rgb(9, 128, 116);
-  font-size: 10px;
-  border-radius: 5px;
-  box-shadow: 0px 2px 3px 2px rgba(34, 60, 80, 0.2);
-} */
-
 .selected__poster{
   text-align: center;
   padding-top: 10px;
 }
-
-/* .popup__background__add__session{
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: #eeb1b1;
-  display: none;
-  z-index: 100;
-} */
 
 .popup__add__seance{
   position: absolute;
@@ -1569,7 +1377,6 @@ div .booked__place{
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: rgba(234, 233, 235, 0.95);
-  /* border-radius: 5px; */
 }
 
 .popup__body__add__seance{
@@ -1581,7 +1388,6 @@ div .booked__place{
 }
 
 .hall__name__input, .time__input, .film__name__input{
-  /* color: rgba(0, 0, 0, 1); */
   background-color: rgba(255, 255, 255, 1);
   border: 1px solid rgba(183, 183, 183, 1);
   font-weight: 400;
@@ -1619,7 +1425,6 @@ div .booked__place{
   left: 0;
   width: 100%;
   height: 100%;
-  /* background-color: rgba(0, 0, 0, 0.5); */
   display: none;
   z-index: 100;
 }
@@ -1653,10 +1458,39 @@ div .booked__place{
   left: -60px;
 }
 
-.popup__delete__session{
-  width: 100%;
+.popup__basket svg {
+  width: 50px;
+  height: 50px;
 }
 
+.popup__delete__seance{
+  position: absolute;
+  width: 960px;
+  margin-top: 230px;
+  box-sizing: border-box;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(234, 233, 235, 0.95);
+}
+
+.popup__body__delete__session{
+  padding: 25px 20px 40px;
+}
+
+.film__delete__btn{
+  background-color: rgba(22, 166, 175, 1);
+  color: rgba(255, 255, 255, 1);
+  font-weight: 500;
+  font-size: 14px;
+  box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.12);
+  box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.24);
+}
+
+.popup__delete__session{
+  width: 100%;
+  font-weight: 400;
+  font-size: 16px;
+}
 
 .popup__background__current__config, .popup__background__booking, .popup__background__order{
   background-image: url("..//client__background.jpg");
@@ -1672,17 +1506,12 @@ div .booked__place{
 }
 
 .head__popup__booking, .head__popup__order{
-  /* background; */
-  /* width: 990px; */
   display: block;
   box-sizing: border-box;
   max-width: 990px;
   min-height: 68px;
   margin: auto;
   padding: 14px;
-  /* position: fixed;
-  top: 0; */
-  /* left: 0;  */
 }
 
 .info__current__config{
@@ -1705,7 +1534,6 @@ div .booked__place{
   font-weight: 700;
   font-size: 16px;
   line-height: 18px;
-  /* margin-top: -2px; */
 }
 
 .info__current__time {
@@ -1724,14 +1552,11 @@ div .booked__place{
 .popup__current__config{
   width: 990px;
   margin: 15px auto;
-  /* padding-top: 25px; */
-  /* height: 700px; */
   background-color: rgba(241, 235, 230, 0.95);
 }
 
 .popup__seance__click{
   top: 380px;
-  /* left: 50%; */
 }
 
 .current__hall__zone{
@@ -1761,15 +1586,10 @@ div .booked__place{
   display: flex;
   flex-wrap: wrap;
   width: 284px;
-  /* height: 240px; */
   box-sizing: border-box;
-  /* padding-top: 10px; */
   margin: 8px auto;
   gap: 4px;
   justify-content: center;
-  /* align-items: center;
-  text-align: center; */
-  /* position: relative; */
 }
 
 .vip{
@@ -1835,7 +1655,6 @@ div .booked__place{
 
 .prices__zone__column{
   display: flex;
-  /* width: 50%; */
   flex-wrap: wrap;
   gap: 10px;
   padding-top: 3px;
@@ -1856,9 +1675,7 @@ div .booked__place{
   text-align: center;
   align-items: center;
   width: 100%;
-  /* margin-left: 3px; */
   gap: 3px;
-  /* margin-top: px; */
 }
 
 .standart, .vip, .disabled, .booking{
@@ -1906,7 +1723,6 @@ div .booked__place{
 
 .popup__header__booking, .popup__header__order{
   width: 990px;
-  /* height: 70px; */
   box-sizing: border-box;
   padding: 4px 15px 0px 15px;
   margin: auto;
@@ -1929,9 +1745,6 @@ div .booked__place{
   font-size: 22px;
   line-height: 25px;
   color: rgba(199, 111, 0, 1);
-  /* box-sizing: border-box;
-  padding: 10px 15px; */
-  /* position: relative; */
 }
 
 .border__top{
@@ -1968,7 +1781,6 @@ div .booked__place{
   line-height: 18px;
   margin-top: 10px;
   margin-bottom: 0;
-  /* margin-left: 15px; */
 }
 
 .popup__booking__data__bold, .popup__order__data__bold{
@@ -1979,12 +1791,8 @@ div .booked__place{
 }
 
 .btn__popup__booking{
-  /* margin-top: 30px;
-  margin-left: 310px; */
   margin: 30px 310px 15px ;
   width: 337px;
-  /* align-items: center; */
-  /* padding: 11px 57px; */
   background-color: rgba(22, 166, 175, 1);
   color: rgba(255, 255, 255, 1);
   font-size: 14px;
@@ -2133,11 +1941,7 @@ div .booked__place{
     padding: 17px 0;
     width: fit-content;
   }
-
-  /* .prices__zone__column{ */
-    /* gap: px; */
-  /* } */
-
+  
   .with__price{
     max-width: 200px;
   }
@@ -2179,9 +1983,6 @@ div .booked__place{
     width: 337px;
     margin: 35px auto;
     display: block;
-    /* align-items: center; */
-    /* text-align: center; */
-    /* justify-self: center; */
     padding: 0;
   }
 
@@ -2193,8 +1994,6 @@ div .booked__place{
 
   .qrcode svg{
     margin: 0;
-    /* width: 200px;
-    height: 200px; */
   }
 
   .admin__body__shadow{
@@ -2244,6 +2043,18 @@ div .booked__place{
     margin-left: 50px;
   }
 
+  .popup__basket{
+    position: absolute;
+    display: none;
+    top: 25px;
+    left: 10px;
+  }
+
+  .popup__basket svg {
+    width: 40px;
+    height: 40px;
+  }
+
   .btns__out {
     display: flex;
     gap: 5px;
@@ -2252,7 +2063,7 @@ div .booked__place{
     margin-top: 25px;
   }
 
-  .popup__hall__manager, .popup__add__film {
+  .popup__hall__manager, .popup__add__film, .popup__delete__seance {
     width: 100%;
     margin-top: 260px;
     height: fit-content;
@@ -2298,7 +2109,6 @@ div .booked__place{
     margin-top: 255px;
     height: fit-content;
   }
-
 }
 
 @media (max-width: 767px){
@@ -2314,7 +2124,6 @@ div .booked__place{
     max-width: 100%;
     gap: 1px;
     margin-top: 5px;
-    /* padding: 5px 0 20px 0; */
   }
 
   .day{
@@ -2385,10 +2194,6 @@ div .booked__place{
     width: 100%;
     box-sizing: border-box;
   }
-
-  /* .login__div__popup{
-    width: 100%;
-  } */
 
   .booking{
     margin-left: -5px;
@@ -2473,7 +2278,6 @@ div .booked__place{
   
   .section__header__name{
     width: 100%;
-    /* text-align: start; */
     margin: 10px 0 0 -35px;
   }
 
@@ -2484,7 +2288,6 @@ div .booked__place{
   
   .section__header__arrow{
     padding: 0;
-    /* width: 30px; */
     top: 13px;
     right: 30px;
   }
@@ -2496,8 +2299,6 @@ div .booked__place{
 
   .create__hall{
     display: flex;
-    /* width: 100%;
-    margin: 30px auto;*/
     align-items: center; 
     justify-content: center;
     width: 159px;
@@ -2509,7 +2310,8 @@ div .booked__place{
   }
 
   .hall__config__name{
-    padding: 0;
+    padding: 8px;
+    width: fit-content;
   }
 
   .hall__places__form{
@@ -2525,11 +2327,6 @@ div .booked__place{
     flex-wrap: wrap;
     justify-content: start;
     padding-left: 30px;
-    /* gap: 3px; */
-  }
-
-  .status__container{
-    /* width: 49%; */
   }
 
   .status__span {
@@ -2573,16 +2370,25 @@ div .booked__place{
     flex-wrap: nowrap;
   }
 
+  .popup__basket{
+    position: absolute;
+    display: none;
+    top: 60px;
+    left: -30px;
+  }
+
+  .popup__basket svg {
+    width: 30px;
+    height: 30px;
+  }
+
   .into__lent__container{
     height: 40px;
-    /* width: fit-content; */
     box-sizing: border-box;
     display: flex;
     flex-wrap: wrap;
     text-align: start;
     padding: 3px;
-    /* align-items: end; */
-    /* justify-content: center; */
   }
 
   .into__lent__name{
@@ -2590,13 +2396,9 @@ div .booked__place{
     width: fit-content;
     height: fit-content;
     margin: auto;
-    /* align-items: center; */
-    /* padding: auto; */
-    /* text-align: center; */
   }
 
   .btns__out{
-    /* width: 100%; */
     margin-top: 30px;
     margin-right: 10px;
   }
@@ -2614,7 +2416,7 @@ div .booked__place{
     margin: 25px;
   }
 
-  .popup__hall__manager, .popup__header, .popup__name__hall__manager, .popup__add__seance, .popup__header, .popup__name__add__seance{
+  .popup__hall__manager, .popup__header, .popup__name__hall__manager, .popup__add__seance, .popup__delete__seance, .popup__header, .popup__name__add__seance, .popup__name__delete__seance{
     width: 100%;
   }
 
@@ -2681,7 +2483,7 @@ div .booked__place{
     margin-top: 20px;
   }
 
-  .film__add__btn, .btn__cancel{
+  .film__add__btn, .btn__cancel, .film__delete__btn{
     width: 200px;
   }
 
@@ -2704,8 +2506,4 @@ div .booked__place{
     padding: 0;
     margin-top: 25px;
   }
-
-
 }
-
-
