@@ -1,16 +1,13 @@
 import "../App.jsx";
 import "../App.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-// Логин - shfe-diplom@netology.ru
-// Пароль - shfe-diplom
-
-export const HallOpened = () => {       
+export const HallOpened = () => {        
     function hideSection(e) {
         e.preventDefault();
         const sectionBody = document.getElementById("hall__opened__body");
         sectionBody.classList.toggle('hall__opened__body__active');
-    }
+    };
 
     let hallsResponse = [];
     let hallArr = [];
@@ -22,10 +19,11 @@ export const HallOpened = () => {
     let [open, setOpen] = useState();
     let [openInfo, setOpenInfo] = useState({text: "Выберите зал", btn: "Открыть/Закрыть зал"});
     
-    function async () {
+    function loadHalls () {
         fetch( 'https://shfe-diplom.neto-server.ru/alldata' )
         .then( response => response.json())
         .then( data => {
+                hallArr = []
                 hallsResponse = data.result.halls;
                 for (let i = 0; i < hallsResponse.length; i++){
                     hallArr.push(hallsResponse[i]["hall_name"])
@@ -44,11 +42,12 @@ export const HallOpened = () => {
                     </button>
                 ));
                 setHalls(halls = hallElements);
-            }
-        );
+        });
     };
 
-    async();
+    useEffect(() => {
+        loadHalls();
+    }, []);
 
     function hallNameChecked(e) {
         let pastActive = document.getElementsByClassName("hall__config__name__active");
@@ -74,15 +73,14 @@ export const HallOpened = () => {
                         btn:"Закрыть продажу билетов",
                     }
                     setOpenInfo(openInfo = newOpenInfo);
-                }
-            }
-        }
-    }
+                };
+            };
+        };
+    };
 
     function openedSave(e){
         e.preventDefault();
         const params = new FormData();
-
         if(open === 0){
             let newOpenInfo = {
                 text:"Зал уже открыт", 
@@ -103,9 +101,12 @@ export const HallOpened = () => {
             method: 'POST',
             body: params 
         })
-            .then( response => response.json())
-            .then( data => console.log( data ));
-    }
+        .then( response => response.json())
+        .then( data => {
+            console.log( data );
+            loadHalls();
+        });
+    };
 
     return (
         <>
@@ -131,6 +132,6 @@ export const HallOpened = () => {
             </section>
         </>
     );
-}
+};
 
 export default HallOpened;
