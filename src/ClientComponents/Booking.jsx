@@ -15,6 +15,7 @@ export const Booking = (item) => {
     let [places, setPlaces] = useState();
     let [coasts, setCoasts] = useState();          
     let [seanceId, setSeanceId] = useState();
+    let [tickets, setTickets] = useState();
     let currentConfig = [];    
     let filmName = info.name;
     let hallName = info.hall;
