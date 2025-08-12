@@ -1,17 +1,18 @@
 import "../App.jsx";
 import "../App.css";
 import { useState, useEffect } from "react";
-
-export const HallOpened = () => {        
+export const HallOpened = () => {    
+    
     function hideSection(e) {
         e.preventDefault();
         const sectionBody = document.getElementById("hall__opened__body");
         sectionBody.classList.toggle('hall__opened__body__active');
-    };
+    }
 
     let hallsResponse = [];
     let hallArr = [];
     let hallElements = [];
+    let hallConfig = [];
     let hallOpen = 0;
     let hallId = 0;
     let [halls, setHalls] = useState();  
@@ -31,7 +32,6 @@ export const HallOpened = () => {
                 function getClass(item){
                     if(hallArr[0] === item){
                         return "hall__config__name__active";
-
                     } else {
                         return "hall__config__name";
                     }
@@ -42,7 +42,8 @@ export const HallOpened = () => {
                     </button>
                 ));
                 setHalls(halls = hallElements);
-        });
+            }
+        );
     };
 
     useEffect(() => {
@@ -73,14 +74,15 @@ export const HallOpened = () => {
                         btn:"Закрыть продажу билетов",
                     }
                     setOpenInfo(openInfo = newOpenInfo);
-                };
-            };
-        };
-    };
+                }
+            }
+        }
+    }
 
     function openedSave(e){
         e.preventDefault();
         const params = new FormData();
+
         if(open === 0){
             let newOpenInfo = {
                 text:"Зал уже открыт", 
@@ -101,12 +103,13 @@ export const HallOpened = () => {
             method: 'POST',
             body: params 
         })
-        .then( response => response.json())
-        .then( data => {
-            console.log( data );
-            loadHalls();
-        });
-    };
+            .then( response => response.json())
+            .then( data => {
+                console.log( data );
+                loadHalls();
+            }
+        );
+    }
 
     return (
         <>
@@ -132,6 +135,6 @@ export const HallOpened = () => {
             </section>
         </>
     );
-};
+}
 
 export default HallOpened;
