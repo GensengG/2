@@ -27,18 +27,16 @@ export const Logout = () => {
         })
         .then( response => response.json())
         .then( response => {
-                result = response;
+                if(response.success){
+                    setAdmin(admin = (
+                        <Admin />
+                    ));
+                } else {
+                    alert(result.error);
+                } 
             }
         );       
-
-        if(result.success){
-            setAdmin(admin = (
-                <Admin />
-            ));
-        } else {
-            alert(result.error);
-        } 
-    }          
+    }            
 
     let [admin, setAdmin] = useState((
         <>
@@ -71,3 +69,4 @@ export const Logout = () => {
 };
 
 export default Logout;
+
