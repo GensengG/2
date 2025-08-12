@@ -289,7 +289,7 @@ body{
   width: 100%;
   margin: auto;
   padding-left: 13px;
-  height: 16px;
+  height: fit-content;
   margin-top: -3px;
   font-size: 14px;
   box-sizing: border-box;
@@ -299,7 +299,7 @@ body{
   width: 100%;
   margin: auto;
   padding-left: 13px;
-  height: 16px;
+  height: fit-content;
   margin-top: 7px;
   font-size: 14px;
   box-sizing: border-box;
