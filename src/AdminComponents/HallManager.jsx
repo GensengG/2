@@ -1,13 +1,15 @@
 import { useState, useEffect } from "react";
-
 export const HallManager = () => {
     const [halls, setHalls] = useState(); 
     const [hallsResponse, setHallsResponse] = useState([]); 
+    let hallsArr = [];
+
     const loadHalls = () => {
         fetch('https://shfe-diplom.neto-server.ru/alldata')
             .then(response => response.json())
             .then(data => {
                 const hallsData = data.result.halls;
+                hallsArr = hallsData;
                 setHallsResponse(hallsData);
                 const hallNames = hallsData.map(hall => hall["hall_name"]);
                 const hallElements = hallNames.map(item => (
@@ -17,7 +19,8 @@ export const HallManager = () => {
                     </div>
                 ));
                 setHalls(hallElements);
-            });
+            }
+        );
     };
 
     useEffect(() => {
@@ -27,66 +30,65 @@ export const HallManager = () => {
     function showPopup() {
         const popUp = document.getElementById("popup__background");
         popUp.style.display = "block";
-    };
+    }
 
     function hidePopup() {
         const popUp = document.getElementById("popup__background");
         popUp.style.display = "none";
-    };
+    }
 
     function deleteHall(e) {
         const bascet = e.target;
         const deleteBtn = bascet.closest("div");
-        const hallText = deleteBtn.children[0].textContent; // например, "- Зал1"
+        const hallText = deleteBtn.children[0].textContent; 
         let hallName = hallText.slice(2);
         let deleteId = 0;
 
-        for (let i = 0; i < hallsResponse.length; i++){
-            if(hallsResponse[i]["hall_name"] === hallName){
-                deleteId = hallsResponse[i].id
+        for (let i = 0; i < hallsArr.length; i++){
+            if(hallsArr[i]["hall_name"] === hallName){
+                deleteId = hallsArr[i].id;
             }
-        };
-
+        }  
+        
         fetch(`https://shfe-diplom.neto-server.ru/hall/${deleteId}`, {
             method: 'DELETE',
         })
-        .then(response => response.json())
-        .then(data => {
-            console.log(data);
-            loadHalls();
-        });
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                loadHalls();
+            }
+        );
     };
 
     function createHall() {
         const addedHallInput = document.getElementById("create__hall");
         const addedHallName = addedHallInput.value;
-
         const params = new FormData();
         params.set("hallName", addedHallName);
-
         fetch('https://shfe-diplom.neto-server.ru/hall', {
             method: 'POST',
             body: params,
-        });
-        .then(response => response.json())
-        .then(data => {
-            console.log(data);
-            loadHalls();
-        });
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                loadHalls();
+            });
 
         hidePopup();
-    };
+    }
     
     function createHallClear() {
         const addedHall = document.getElementById("create__hall");
         addedHall.value = "";
-    };
+    }
 
     function hideSection(e) {
         e.preventDefault();
         const sectionBody = document.getElementById("hall__manager__body");
         sectionBody.classList.toggle('hall__manager__body__active');
-    };
+    }
     
     return (
         <>
