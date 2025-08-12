@@ -1,7 +1,8 @@
 import "../App.jsx";
 import "../App.css";
+import { useState } from "react";
 
-export const Sheme = (click) => {
+export const Sheme = ( click ) => {
     let grid = click.click;
     let startConfig = grid.config;
     let newRow = grid.row;
@@ -40,13 +41,15 @@ export const Sheme = (click) => {
     }   
     function generatePlaces(arr){
         return arr.map(item => (
-            <div className={`place ${item}`} key={counter ()} onClick={placeStatus}>          
+            <div className={`place ${item}`} key={counter ()} onClick={placeStatus}>
+                
             </div> 
         ));
     }
     function counter (){
         return index ++;
     }
+
     return (
         <>
             {startConfig.map(item => (
@@ -57,5 +60,4 @@ export const Sheme = (click) => {
         </>
     )
 }
-
 export default Sheme;
