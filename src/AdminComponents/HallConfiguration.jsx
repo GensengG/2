@@ -1,12 +1,9 @@
 import "../App.jsx";
 import "../App.css";
 import { useState, useEffect } from "react";
-import { Sheme } from "./Sheme.jsx";
-
-// Логин - shfe-diplom@netology.ru
-// Пароль - shfe-diplom
-
-export const HallConfiguration = () => {       
+import { Sheme } from "./Sheme";
+export const HallConfiguration = () => {    
+    
     function hideSection(e) {
         e.preventDefault();
         const sectionBody = document.getElementById("hall__config__body");
@@ -16,6 +13,7 @@ export const HallConfiguration = () => {
     let hallsResponse = [];
     let hallArr = [];
     let hallElements = [];
+    let hallConfig = [];
     let [halls, setHalls] = useState();  
     let [id, setId] = useState(); 
     let [grid, setGrid] = useState({row: 0, places: 0, config: [], id: 0});
@@ -38,26 +36,27 @@ export const HallConfiguration = () => {
                 setId(id = hallId);
                 setGrid({row: hallRaws, places: hallPlaces, config: hallConfig, id: hallId});
                 setFixedConfig({row: hallRaws, places: hallPlaces, config: hallConfig});
-            };
+            }
         };
-    };
+    }
 
     function loadHalls(){
         fetch( 'https://shfe-diplom.neto-server.ru/alldata' )
             .then( response => response.json())
             .then( data => {
-                hallArr = [];
-                hallsResponse = data.result.halls;
-                for (let i = 0; i < hallsResponse.length; i++){
-                    hallArr.push(hallsResponse[i]["hall_name"])
-                };
+                    hallArr = [];
+                    hallsResponse = data.result.halls;
+                    for (let i = 0; i < hallsResponse.length; i++){
+                        hallArr.push(hallsResponse[i]["hall_name"])
+                    };
 
                 function getClass(item){
-                    if(hallArr[0] === item){
-                        return "hall__config__name__active";
-                    } else {
-                        return "hall__config__name";
-                    }
+                        if(hallArr[0] === item){
+                            return "hall__config__name__active";
+
+                        } else {
+                            return "hall__config__name";
+                        }
                 };
 
                 hallElements = hallArr.map(item => (
@@ -69,8 +68,8 @@ export const HallConfiguration = () => {
                 let activeHallName = document.getElementsByClassName("hall__config__name__active")[0]?.textContent;
                 setActiveHallName(activeHall = activeHallName);
                 startState(activeHall);
-        });
-    };
+            })
+    }
 
     useEffect(() => {
         loadHalls();
@@ -133,7 +132,7 @@ export const HallConfiguration = () => {
 
     function configBtnCancel(){
         setConfig(config = <Sheme click = {fixedConfig}/>);
-    };
+    }
 
     function configBtnSave(){
         let rows = Array.from(document.getElementsByClassName("row"));
@@ -141,15 +140,14 @@ export const HallConfiguration = () => {
         let arrayConfig = [] 
         for(let i = 0; i < rows.length; i++){
             arrayConfig.push(Array.from(rows[i].getElementsByClassName("place")))
-        };
+        }
 
         for(let i = 0; i < arrayConfig.length; i++){
             for(let j = 0; j < arrayConfig[i].length; j++){
                 let className = arrayConfig[i][j].className;
                 arrayConfig[i][j] = className.slice(6);
-            };
-        };
-        
+            }
+        }
         let placeCount = arrayConfig[0].length;
         const params = new FormData();
         params.set('rowCount', String(rowCount));
@@ -158,13 +156,13 @@ export const HallConfiguration = () => {
         fetch( `https://shfe-diplom.neto-server.ru/hall/${id}`, {
             method: 'POST',
             body: params 
-        });
+        })
         .then( response => response.json())
         .then(data => {
             console.log(data);
             loadHalls();
-        });
-    };
+        })
+    }
 
     return (
         <>
@@ -236,3 +234,5 @@ export const HallConfiguration = () => {
 };
 
 export default HallConfiguration;
+
+
