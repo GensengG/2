@@ -1,19 +1,24 @@
 import "../App.jsx";
 import "../App.css";
 import { useState, useEffect } from "react";
-
 export const HallPrice = () => {    
+    
     function hideSection(e) {
         e.preventDefault();
         const sectionBody = document.getElementById("hall__price__body");
         sectionBody.classList.toggle("hall__price__body__active");
-    };
+    }
 
     let hallsResponse = [];
     let hallArr = [];
     let hallElements = [];
+    let hallConfig = [];
     let hallId = 0;
     let [halls, setHalls] = useState();  
+    let prices = {
+        standart: 0,
+        vip: 0,
+    }
     let [id, setId] = useState();
     let [priceInfo, setPriceInfo] = useState({standart: 0, vip: 0});
     let [priceInfoFixed, setPriceInfoFixed] = useState({standart: 0, vip: 0});
@@ -28,9 +33,9 @@ export const HallPrice = () => {
                 priceInfoFixed.standart = hallsResponse[i]["hall_price_standart"];
                 priceInfoFixed.vip = hallsResponse[i]["hall_price_vip"];
                 setId(id = hallId);
-            };
+            }
         };
-    };
+    }
 
     useEffect(() => {
         fetch( 'https://shfe-diplom.neto-server.ru/alldata' )
@@ -57,15 +62,29 @@ export const HallPrice = () => {
                 setHalls(halls = hallElements);
 
                 startPrice(document.getElementsByClassName("hall__config__name__active")[0]);
-        });
+            }  
+        )
     }, []);
     
     function hallNameChecked(e) {
         let pastActive = document.getElementsByClassName("hall__config__name__active");
         pastActive[0].className = "hall__config__name";
         e.target.className = "hall__config__name__active";
+
+        let hallName = e.target.textContent;
+        for (let i = 0; i < hallsResponse.length; i++){
+            if(hallsResponse[i]["hall_name"] === hallName){
+                hallId = hallsResponse[i].id;
+                let standart = hallsResponse[i]["hall_price_standart"];
+                let vip = hallsResponse[i]["hall_price_vip"];
+                let standartBtn = document.getElementById("standartPrice");
+                let vipBtn = document.getElementById("vipPrice");
+                standartBtn.value = standart;
+                vipBtn.value = vip;
+            }
+        };
         startPrice(e.target);
-    };
+    }
 
     let standartPrice = document.getElementById("standartPrice");
     let vipPrice = document.getElementById("vipPrice");
@@ -76,7 +95,7 @@ export const HallPrice = () => {
         newPrice.standart = e.value;
         newPrice.vip = vipPrice.value;
         setPriceInfo(priceInfo = newPrice)
-    };
+    }
 
     function changeVip(e){
         e.preventDefault();
@@ -84,26 +103,30 @@ export const HallPrice = () => {
         newPrice.standart = standartPrice.value;
         newPrice.vip = e.value;
         setPriceInfo(priceInfo = newPrice)
-    };
+    }
 
     function priceBtnCancel(){
         standartPrice.value = priceInfoFixed.standart;
         vipPrice.value = priceInfoFixed.vip;
-    };
+    }
 
     function priceBtnSave(){
         let params = new FormData()
         params.set('priceStandart', Number(standartPrice.value))
-        params.set('priceVip', Number(vipPrice.value))
-        fetch( `https://shfe-diplom.neto-server.ru/price/${id}`, {
-            method: 'POST',
-            body: params 
-        })
-        .then( response => response.json())
-        .then(data => {
-            console.log(data)
-        })
-    };
+        params.set('priceVip', Number(vipPrice.value));
+        if ((Number(vipPrice.value) > 0) && (Number(standartPrice.value) > 0)){
+            fetch( `https://shfe-diplom.neto-server.ru/price/${id}`, {
+                method: 'POST',
+                body: params 
+            })
+            .then( response => response.json())
+            .then(data => {
+                console.log(data)
+            })
+        } else {
+            alert("Цена билетов не может быть отрицательной величиной");
+        } 
+    }
 
     return (
         <>
@@ -144,6 +167,6 @@ export const HallPrice = () => {
             </section>
         </>
     );
-};
+}
 
 export default HallPrice;
