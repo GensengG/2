@@ -45,6 +45,7 @@ export const Films = () => {
 ;
     const dateNumber = (i) => {
         let currentDate = new Date();
+        let nextDate = currentDate.setDate(currentDate.getDate() + i)
         return currentDate.getDate();
     }
 
@@ -242,3 +243,4 @@ export const Films = () => {
 };
 
 export default Films;
+
