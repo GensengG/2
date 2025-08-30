@@ -2,7 +2,6 @@ import "../App.jsx";
 import "../App.css";
 import { useState } from "react";
 import { QRCode } from "react-qr-code";
-// import { ReactDOM   } from "react-dom";
 
 export const Booking = (item) => {
     let info = item.item.info;
@@ -339,5 +338,6 @@ export const Booking = (item) => {
         </>
     )
 }
+
 
 export default Booking;
