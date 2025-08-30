@@ -1,6 +1,6 @@
 import "../App.jsx";
 import "../App.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Booking } from "./Booking.jsx";
 
 export const Films = () => {
@@ -45,7 +45,6 @@ export const Films = () => {
 ;
     const dateNumber = (i) => {
         let currentDate = new Date();
-        let nextDate = currentDate.setDate(currentDate.getDate() + i)
         return currentDate.getDate();
     }
 
@@ -57,9 +56,6 @@ export const Films = () => {
     let [filmsResult, setFilmsResult] = useState();
     let [clickSeance, setClickSeance] = useState();
     let [filmsData, setFilmsData] = useState();
-    let seancesArr = [];
-    let filmsArr = [];
-    let hallsArr = [];
     let info = [];
     let result = [];
     let films = [];
@@ -169,7 +165,7 @@ export const Films = () => {
     function hidePopupSeance(e) {
         const popUp = document.getElementById("popup__background__seance__click");
         popUp.style.display = "none";
-    }
+    } 
 
     function dayClick(e) {
         films = [];
@@ -179,11 +175,6 @@ export const Films = () => {
         }
         e.target.classList.add("active");
         generateStartFilms(); 
-    }
-
-    function propsChange(item){
-        setClickSeance(clickSeance = item)
-        console.log(clickSeance);
     }
 
     let countNextDay = 0;
@@ -249,6 +240,5 @@ export const Films = () => {
     );
 
 };
-
 
 export default Films;
