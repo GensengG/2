@@ -2,11 +2,7 @@ import "../App.jsx";
 import "../App.css";
 import { useState, useEffect } from "react";
 
-// Логин - shfe-diplom@netology.ru
-// Пароль - shfe-diplom
-
-export const HallOpened = ( {hallsStart} ) => {    
-    
+export const HallOpened = ( {hallsStart} ) => {      
     function hideSection(e) {
         e.preventDefault();
         const sectionBody = document.getElementById("hall__opened__body");
@@ -14,9 +10,6 @@ export const HallOpened = ( {hallsStart} ) => {
     }
 
     let [hallsResponse, setHallsResponse] = useState(hallsStart);
-    let hallArr = [];
-    let hallElements = [];
-    let hallConfig = [];
     let hallOpen = 0;
     let hallId = 0;
     let [halls, setHalls] = useState();  
@@ -134,5 +127,6 @@ export const HallOpened = ( {hallsStart} ) => {
         </>
     );
 }
+
 
 export default HallOpened;
