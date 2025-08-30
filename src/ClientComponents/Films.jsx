@@ -57,7 +57,6 @@ export const Films = () => {
     let [filmsResult, setFilmsResult] = useState();
     let [clickSeance, setClickSeance] = useState();
     let [filmsData, setFilmsData] = useState();
-    // let filmsData = [];
     let seancesArr = [];
     let filmsArr = [];
     let hallsArr = [];
@@ -166,27 +165,11 @@ export const Films = () => {
             generateStartFilms();
         });
     }); 
-    
-    // function seanceClick(item){
-    //     console.log(item);
-    //     const popUp = document.getElementById("popup__background__seance__click");
-    //     popUp.style.display = "block";
-    // }
 
     function hidePopupSeance(e) {
         const popUp = document.getElementById("popup__background__seance__click");
         popUp.style.display = "none";
     }
-
-    // function showPopupSeance(e) {
-    //     const dateBtn = document.getElementsByClassName("day active")[0];
-    //     const date = dateBtn.textContent.slice(0, -2)
-    //     console.log(e.target, date)
-    // }
-
-    // seancesArr = filmsData.seances;
-    // filmsArr = filmsData.films;
-    // hallsArr = filmsData.halls;   
 
     function dayClick(e) {
         films = [];
@@ -266,5 +249,6 @@ export const Films = () => {
     );
 
 };
+
 
 export default Films;
