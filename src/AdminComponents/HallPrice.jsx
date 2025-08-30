@@ -1,10 +1,6 @@
 import "../App.jsx";
 import "../App.css";
 import { useState, useEffect } from "react";
-
-// Логин - shfe-diplom@netology.ru
-// Пароль - shfe-diplom
-
 export const HallPrice = ( {hallsStart} ) => {    
     
     function hideSection(e) {
@@ -14,17 +10,8 @@ export const HallPrice = ( {hallsStart} ) => {
     }
 
     let [hallsResponse, setHallsResponse] = useState(hallsStart);
-    let hallArr = [];
-    let hallElements = [];
-    // let hallConfig = [];
-    // let hallId = 0;
     let [halls, setHalls] = useState(); 
     let [actualId, setActualId] = useState(0);   
-    let prices = {
-        standart: 0,
-        vip: 0,
-    }
-    // let [id, setId] = useState();
     let [priceInfo, setPriceInfo] = useState({standart: 0, vip: 0});
     let [priceInfoFixed, setPriceInfoFixed] = useState({standart: 0, vip: 0});
     let [startHall, setStartHall] = useState("");
@@ -37,8 +24,6 @@ export const HallPrice = ( {hallsStart} ) => {
                 priceInfo.vip = hallsResponse[i]["hall_price_vip"];
                 priceInfoFixed.standart = hallsResponse[i]["hall_price_standart"];
                 priceInfoFixed.vip = hallsResponse[i]["hall_price_vip"];
-                // setId(hallId);
-                // setActualId(hallsResponse[i].id);
             }
         };
         console.log(actualId)
@@ -94,12 +79,9 @@ export const HallPrice = ( {hallsStart} ) => {
                 priceInfoFixed.vip = hallsResponse[i]["hall_price_vip"];
                 standartBtn.value = standart;
                 vipBtn.value = vip;
-                // setActualId(hallId);
-                // setPriceInfoFixed(priceInfoFixed.standart = standart, priceInfoFixed.vip = vip);
             }
         };
         startPrice(hallName);
-        // setId(hallId);
         console.log(actualId);
     }
 
@@ -123,8 +105,6 @@ export const HallPrice = ( {hallsStart} ) => {
     }
 
     function priceBtnCancel(){
-        // standartPrice.value = priceInfoFixed.standart;
-        // vipPrice.value = priceInfoFixed.vip;
         setPriceInfo(priceInfoFixed);
     }
 
@@ -188,3 +168,4 @@ export const HallPrice = ( {hallsStart} ) => {
 }
 
 export default HallPrice;
+
