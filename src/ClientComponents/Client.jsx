@@ -8,7 +8,6 @@ export const Client = () => {
     function loginBtn(){
         let backgroundImg = document.getElementsByTagName("body");
         backgroundImg[0].setAttribute("style", "background-image: url(../public/admin__background.jpg);") 
-        // backgroundImg[0].setAttribute("style", "background-image: url(..//admin__background.jpg); background-color: rgba(0, 0, 0, 0.5); background-size:cover; background-position: center; background-repeat: no-repeat; object-fit: cover")
         setState(state = (
             <Logout/>
         ))
@@ -33,3 +32,4 @@ export const Client = () => {
 };
 
 export default Client;
+
