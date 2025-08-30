@@ -1,6 +1,6 @@
 import "../App.jsx";
 import "../App.css";
-import { useState } from "react";
+import { useState, useEffect} from "react";
 import { QRCode } from "react-qr-code";
 
 export const Booking = (item) => {
@@ -14,11 +14,14 @@ export const Booking = (item) => {
     let [coasts, setCoasts] = useState();          
     let [seanceId, setSeanceId] = useState();
     let [tickets, setTickets] = useState();
-    let filmName = info.name;
-    let hallName = info.hall;
+    let [filmName, setFilmName] = useState();
+    let [hallName, setHallName] = useState();
     let indexPlaces = 0;
     let indexRows = 0;
-    let rowArr = [];
+    let [rowArr, setRowArr] = useState([]);
+    let [bookingPopup, setBookingPopup] = useState();
+    let [ticketsPopup, setTicketsPopup] = useState();
+    let [orderPopup, setOrderPopup] = useState();
 
     function counterPlaces (){
         return indexPlaces++;
@@ -32,6 +35,7 @@ export const Booking = (item) => {
         let choosePlace = e.target;
         choosePlace.classList.toggle("booked__place");
     }
+
     function showPopupSeance(e) {
         const now = new Date();
         const hours = now.getHours();
@@ -50,54 +54,115 @@ export const Booking = (item) => {
         const activDayBtn = document.getElementsByClassName("day active");
         const activeNumber = Number(activDayBtn[0].textContent.slice(-2));
         const activeWeekDay = activDayBtn[0].textContent.slice(-6);
+
         if((activeNumber === number) && (activeWeekDay.slice(0, 2) === weekDay(day))){
             if(hours > Number(seanceTimeArr[0])){
                 alert("К сожалению, этот сеанс уже прошел");
+                return;
             } else if(hours === Number(seanceTimeArr[0])){
                 if (minutes >= Number(seanceTimeArr[1])){
                     alert("К сожалению, этот сеанс уже начался");
                 } 
+                return;
             }
-        } else {
-            const popUp = document.getElementById("popup__background__current__config");
-            popUp.style.display = "block";
-            setClickTime(clickTime = e.target.textContent);
-            let needFilmArr = [];
-            let currentPrices = {};
-            for(let i = 0; i < seancesArr.length; i++){
-                if(seancesArr[i]["seance_filmid"] === info.id){
-                    needFilmArr.push(seancesArr[i]);
-                }
-            }
+        } 
 
-            for(let i = 0; i < hallsArr.length; i++){   
-                if(hallsArr[i]["hall_name"] === info.hall){
-                    currentPrices.standart = hallsArr[i]["hall_price_standart"];
-                    currentPrices.vip = hallsArr[i]["hall_price_vip"];
-                    setPrices(prices = currentPrices);
-                }
-            }
+        setClickTime(clickTime = e.target.textContent);
+        setFilmName(info.name);
+        setHallName(info.hall);
 
-            for(let i = 0; i < needFilmArr.length; i++){
-                if((Number(needFilmArr[i]["seance_time"].slice(-2)) === Number(e.target.textContent.slice(-2))) &&
-                (Number(needFilmArr[i]["seance_time"].slice(0, 2)) === Number(e.target.textContent.slice(0, 2)))){
-                    setSeanceId(seanceId = needFilmArr[i].id);
-                }
+        let needFilmArr = [];
+        let currentPrices = {
+            standart: 0,
+            vip: 0,
+        };
+        for(let i = 0; i < seancesArr.length; i++){
+            if(seancesArr[i]["seance_filmid"] === info.id){
+                needFilmArr.push(seancesArr[i]);
             }
-
-            fetch( `https://shfe-diplom.neto-server.ru/hallconfig?seanceId=${seanceId}&date=${parmsDate()}` )
-                .then( response => response.json())
-                .then( data => {
-                    setConfig(config = data.result);
-            });
         }
-    }
 
-    function showPopupBooking() {
-        const popUp = document.getElementById("popup__background__booking");
-        popUp.style.display = "block";
-    }
+        for(let i = 0; i < hallsArr.length; i++){   
+            if(hallsArr[i]["hall_name"] === info.hall){
+                currentPrices.standart = hallsArr[i]["hall_price_standart"];
+                currentPrices.vip = hallsArr[i]["hall_price_vip"];
+                setPrices(prices = currentPrices);
+            }
+        }
 
+        for(let i = 0; i < needFilmArr.length; i++){
+            if((Number(needFilmArr[i]["seance_time"].slice(-2)) === Number(e.target.textContent.slice(-2))) &&
+            (Number(needFilmArr[i]["seance_time"].slice(0, 2)) === Number(e.target.textContent.slice(0, 2)))){
+                setSeanceId(seanceId = needFilmArr[i].id);
+            }
+        }
+
+        
+        function generateHallConfig(config){
+            let arr = []
+            for(let i = 0; i < config.length; i++){
+                arr.push(
+                    <div className = "current__row" id={indexRows} key={counterRows()} >
+                        {generatePlaces(config[i])}
+                    </div>
+                )
+            }
+            setRowArr(rowArr = arr);
+        }
+
+        fetch( `https://shfe-diplom.neto-server.ru/hallconfig?seanceId=${seanceId}&date=${parmsDate()}` )
+            .then( response => response.json())
+            .then( data => {
+                console.log(data)
+                setConfig(config = data.result);
+                generateHallConfig(config);
+                setBookingPopup(
+                    <div id = "popup__background__current__config" className="popup__background__current__config">
+                        <div className="head__popup__current__config">
+                            <div className="logo">ИДЁМ<p className="logo logo__B">В</p>КИНО</div>
+                        </div>
+                        <div className="popup popup__current__config">
+                            <div className="info__current__config"> 
+                                <p className="info__current info__current__film">{info.name}</p>
+                                <p className="info__current info__current__time">Начало сеанса {clickTime}</p>
+                                <p className="info__current info__current__hall">{info.hall}</p>
+                            </div>
+                            <div className = "current__hall__zone">
+                                <div className="hall__container">
+                                    <img className="display" src="../public/display.png"></img>
+                                    <div className="places__zone"> {rowArr} </div>
+                                </div>
+                                <div className="prices__zone">
+                                    <div className="prices__zone__column with__price">
+                                        <div className="prices__tipe">
+                                            <div className="place free__standart"></div>
+                                            <p className="prices__zone__text">Свободно ({prices.standart}руб)</p>
+                                        </div>
+                                        <div className="prices__tipe">
+                                            <div className="place free__vip"></div>
+                                            <p className="prices__zone__text">Свободно VIP ({prices.vip}руб)</p>
+                                        </div>
+                                    </div>
+                                    <div className="prices__zone__column no__price">
+                                        <div className="prices__tipe">
+                                            <div className="place disabled"></div>
+                                            <p className="prices__zone__text">Занято</p>
+                                        </div>
+                                        <div className="prices__tipe">
+                                            <div className="place booking"></div>
+                                            <p className="prices__zone__text">Выбрано</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className = "save__current__config">
+                                <button className = "btn__save__current__config" onClick={byingTickets}>Забронировать</button> 
+                            </div>
+                        </div>
+                    </div> 
+                );  
+        }); 
+    }
     function statusPlace(status){
         if(status === "standart"){
             return "free__standart"
@@ -114,15 +179,6 @@ export const Booking = (item) => {
             </div> 
         ));
     }
-
-    for(let i = 0; i < config.length; i++){
-        rowArr.push(
-            <div className = "current__row" id={indexRows} key={counterRows()} >
-                {generatePlaces(config[i])}
-            </div>
-        )
-    }
-
     let parmsDate = () => {
         let activDayBtn = document.getElementsByClassName("day active");
         let clickDate = 0;
@@ -218,7 +274,8 @@ export const Booking = (item) => {
         setPlaces(places = placesArr.join());
         setCoasts(coasts = coastArr.reduce((acc, number) => acc + number, 0))
 
-        showPopupBooking();
+        let booking = document.getElementById("popup__background__current__config");
+        booking.style.display = "none";
 
         const params = new FormData();
         params.set('seanceId', seanceId);
@@ -229,65 +286,11 @@ export const Booking = (item) => {
             body: params 
         })
         .then( response => response.json())
-        .then( data => console.log( data ));
-    }
-    
-    function showQRcode(){
-        const popUpBooking = document.getElementById("popup__background__booking");
-        popUpBooking.style.display = "none";
-        const popUpOrder = document.getElementById("popup__background__order");
-        popUpOrder.style.display = "block";
-    }
+        .then( data => 
+            console.log( data )
+        );
 
-    return (
-        <>
-            {info.time.map(elem => (
-                <button className = "time" onClick={showPopupSeance}>{elem}</button>
-            ))}
-
-            <div id = "popup__background__current__config" className="popup__background__current__config">
-                <div className="head__popup__current__config">
-                    <div className="logo">ИДЁМ<p className="logo logo__B">В</p>КИНО</div>
-                </div>
-                <div className="popup popup__current__config">
-                    <div className="info__current__config"> 
-                        <p className="info__current info__current__film">{filmName}</p>
-                        <p className="info__current info__current__time">Начало сеанса {clickTime}</p>
-                        <p className="info__current info__current__hall">{hallName}</p>
-                    </div>
-                    <div className = "current__hall__zone">
-                        <div className="hall__container">
-                            <img className="display" src="../public/display.png"></img>
-                            <div className="places__zone"> {rowArr} </div>
-                        </div>
-                        <div className="prices__zone">
-                            <div className="prices__zone__column with__price">
-                                <div className="prices__tipe">
-                                    <div className="place free__standart"></div>
-                                    <p className="prices__zone__text">Свободно ({prices.standart}руб)</p>
-                                </div>
-                                <div className="prices__tipe">
-                                    <div className="place free__vip"></div>
-                                    <p className="prices__zone__text">Свободно VIP ({prices.vip}руб)</p>
-                                </div>
-                            </div>
-                            <div className="prices__zone__column no__price">
-                                <div className="prices__tipe">
-                                    <div className="place disabled"></div>
-                                    <p className="prices__zone__text">Занято</p>
-                                </div>
-                                <div className="prices__tipe">
-                                    <div className="place booking"></div>
-                                    <p className="prices__zone__text">Выбрано</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className = "save__current__config">
-                        <button className = "btn__save__current__config" onClick={byingTickets}>Забронировать</button> 
-                    </div>
-                </div>
-            </div>                    
+        setTicketsPopup(
             <div id = "popup__background__booking" className="popup__background__booking">
                 <div className="head__popup__booking">
                     <div className="logo">ИДЁМ<p className="logo logo__B">В</p>КИНО</div>
@@ -310,6 +313,13 @@ export const Booking = (item) => {
                     <div className="border__bottom"></div>
                 </div>
             </div>
+        )
+    }
+    
+    function showQRcode(){
+        const popUpBooking = document.getElementById("popup__background__booking");
+        popUpBooking.style.display = "none";
+        setOrderPopup(
             <div id = "popup__background__order" className="popup__background__order">
                 <div className="head__popup__order">
                     <div className="logo">ИДЁМ<p className="logo logo__B">В</p>КИНО</div>
@@ -335,9 +345,18 @@ export const Booking = (item) => {
                     <div className="border__bottom"></div>
                 </div>
             </div>
+        )
+    }
+    return (
+        <>
+            {info.time.map(elem => (
+                <button className = "time" onClick={showPopupSeance}>{elem}</button>
+            ))}
+            {bookingPopup}
+            {ticketsPopup}
+            {orderPopup}
         </>
     )
 }
-
 
 export default Booking;
