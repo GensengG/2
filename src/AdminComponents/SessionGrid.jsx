@@ -3,11 +3,7 @@ import "../App.css";
 import { useState, useEffect } from "react";
 import React, { cloneElement } from 'react';
 
-// Логин - shfe-diplom@netology.ru
-// Пароль - shfe-diplom
-
 export const SessionGrid = ( {hallsStart, seancesStart, filmsStart} ) => {    
-    
     function hideSection(e) {
         e.preventDefault();
         const sectionBody = document.getElementById("session__grid__body");
@@ -62,29 +58,6 @@ export const SessionGrid = ( {hallsStart, seancesStart, filmsStart} ) => {
         }
 
         setFilmsInformation(filmsInfo);
-
-        // let colorArr = [
-        //     "#CCCCFF",
-        //     "#C5D0E6",
-        //     "#ABCDEF",
-        //     "#4D7198",
-        //     "#9ACEEB",
-        //     "#606E8C",
-        //     "#A2A2D0",
-        //     "#A2ADD0",
-        //     "#5F9EA0",
-        //     "#B0B7C6",
-        //     "#00538A",
-        //     "#2271B3",
-        //     "#9DB1CC",
-        //     "#49678D",
-        //     "#5D9B9B",
-        //     "#2A6478",
-        //     "#79A0C1",
-        //     "#6699CC",
-        //     "#4682B4",
-        // ];
-
         function setRandomColor() {      
             let filmsArr = document.getElementsByClassName("films__list__item");
             for(let i = 0; i < filmsArr.length; i++){
@@ -279,8 +252,6 @@ export const SessionGrid = ( {hallsStart, seancesStart, filmsStart} ) => {
                 }
             }
 
-            // console.log(hallId);
-
             for (let i = 0; i < sessionResponse.length; i++){
                 if(sessionResponse[i]["seance_hallid"] === hallId){
                     let filmId = sessionResponse[i]["seance_filmid"];
@@ -355,7 +326,6 @@ export const SessionGrid = ( {hallsStart, seancesStart, filmsStart} ) => {
         description.value = "";
         country.value = "";
         poster.value = "";
-        // setPoster(posters = "Постер еще не выбран")
     }
 
     function filmAdd(){
@@ -379,11 +349,6 @@ export const SessionGrid = ( {hallsStart, seancesStart, filmsStart} ) => {
             alert("продолжительность фильма не может быть отрицательной величиной");
         }
     }
-
-    // function ShowPopupSession(){
-    //     const popUp = document.getElementById("popup__background__add__session");
-    //     popUp.style.display = "block";
-    // }
 
     function hidePopupSession() {
         const popUp = document.getElementById("popup__background__add__session");
@@ -546,7 +511,6 @@ export const SessionGrid = ( {hallsStart, seancesStart, filmsStart} ) => {
                                         <button className = "film__add__btn" onClick={filmAdd}>Добавить фильм</button>
                                         <input type="file" name="poster" id="poster" accept=".png" className = "film__poster__input"></input>  
                                         <button id="poster__add__btn" className="poster__add__btn" onClick={posterAdd}>Загрузить постер</button>
-                                        {/* <span id="selected__poster" className="selected__poster">{posters}</span> */}
                                         <button className = "btn__cancel">Отменить</button>
                                     </div>
                                 </div>
@@ -611,5 +575,6 @@ export const SessionGrid = ( {hallsStart, seancesStart, filmsStart} ) => {
         </>
     );
 }
+
 
 export default SessionGrid;
