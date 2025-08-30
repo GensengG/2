@@ -26,7 +26,6 @@ export const HallPrice = ( {hallsStart} ) => {
                 priceInfoFixed.vip = hallsResponse[i]["hall_price_vip"];
             }
         };
-        console.log(actualId)
     }
 
     function loadPrices(){
@@ -168,4 +167,5 @@ export const HallPrice = ( {hallsStart} ) => {
 }
 
 export default HallPrice;
+
 
